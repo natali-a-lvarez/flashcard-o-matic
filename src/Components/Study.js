@@ -1,11 +1,18 @@
 import React from "react";
 import { listDecks } from "../utils/api";
 import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  Link,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
+import { Breadcrumb } from "react-bootstrap";
 
 function Study() {
   const history = useHistory();
   const [deck, setDeck] = useState([]);
+  const { deckId } = useParams();
+  console.log(deckId);
 
   useEffect(() => {
     async function fetchData() {
@@ -25,7 +32,19 @@ function Study() {
 
   console.log(deck);
 
-  return <p>study</p>;
+  return (
+    <>
+      <Breadcrumb>
+        <Breadcrumb.Item>
+          <Link to="/">Home</Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <Link to="/decks/:deckId/">Placeholder</Link>
+        </Breadcrumb.Item>
+        <Breadcrumb.Item active>Study</Breadcrumb.Item>
+      </Breadcrumb>
+    </>
+  );
 }
 
 export default Study;

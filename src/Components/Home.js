@@ -1,6 +1,10 @@
 import React from "react";
 import { listDecks, deleteDeck } from "../utils/api";
-import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
+import {
+  useHistory,
+  Link,
+  useParams,
+} from "react-router-dom/cjs/react-router-dom.min";
 import { useState, useEffect } from "react";
 
 function Home() {
@@ -31,8 +35,6 @@ function Home() {
       return await deleteDeck(deck.id);
     }
   }
-
-  console.log(decks);
 
   const listOfDecks = decks.map((deck) => {
     return (
