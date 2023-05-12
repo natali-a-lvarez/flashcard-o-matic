@@ -1,27 +1,56 @@
-import React from "react";
-import { Breadcrumb } from "react-bootstrap";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { createDeck, readDeck } from "../utils/api";
 
 function CreateDeck() {
+  const history = useHistory();
+  const initialDeckState = {
+    name: "",
+    description: "",
+  };
+  const [newDeck, setNewDeck] = useState(initialDeckState);
+
+  function handleChange({ target }) {
+    setNewDeck({
+      ...newDeck,
+      [target.name]: target.value,
+    });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const abortController = new AbortController();
+    const response = await createDeck({ ...newDeck }, abortController.signal);
+    history.push(`/`);
+    return response;
+  }
+
+  async function handleCancel() {
+    history.push(`/`);
+  }
+
   return (
     <>
-      <Breadcrumb>
-        <Breadcrumb.Item>
+      <ol className="breadcrumb">
+        <li className="breadcrumb-item">
           <Link to="/">Home</Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item active>Create Deck</Breadcrumb.Item>
-      </Breadcrumb>
+        </li>
+        <li className="breadcrumb-item active">Create Deck</li>
+      </ol>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Name
           </label>
           <input
             type="text"
-            placeholder="Deck Name"
+            name="name"
+            placeholder="Deck name"
             className="form-control"
             id="name"
+            onChange={handleChange}
           />
         </div>
         <div className="mb-2">
@@ -30,16 +59,23 @@ function CreateDeck() {
           </label>
           <textarea
             className="form-control"
-            placeholder="Brief description of deck"
+            name="description"
+            placeholder="Brief descriptionn of the deck."
             id="description"
+            onChange={handleChange}
           />
         </div>
-        <Link type="submit" className="btn btn-secondary" to="/">
-          Cancel
-        </Link>
-        <Link type="submit" className="btn btn-primary" to="/decks/:deckId">
-          Submit
-        </Link>
+        <button onClick={handleCancel} className="btn btn-secondary mx-2">
+          Done
+        </button>
+        <button
+          onSubmit={handleSubmit}
+          type="submit"
+          className="btn btn-primary"
+          to="/decks/:deckId"
+        >
+          Save
+        </button>
       </form>
     </>
   );
