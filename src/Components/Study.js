@@ -1,25 +1,25 @@
-import React from "react";
-import { listDecks } from "../utils/api";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   useHistory,
-  Link,
   useParams,
+  Link,
 } from "react-router-dom/cjs/react-router-dom.min";
-import { Breadcrumb } from "react-bootstrap";
+import { readDeck } from "../utils/api";
+import { deleteDeck, deleteCard } from "../utils/api";
 
 function Study() {
   const history = useHistory();
-  const [deck, setDeck] = useState([]);
   const { deckId } = useParams();
-  console.log(deckId);
+  const [deck, setDeck] = useState({});
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       const abortController = new AbortController();
       try {
-        const deckResponse = await listDecks(abortController.signal);
+        const deckResponse = await readDeck(deckId, abortController.signal);
         setDeck(deckResponse);
+        setCards(deckResponse.cards);
       } catch (error) {
         console.error("Something went wrong", error);
       }
@@ -30,19 +30,20 @@ function Study() {
     fetchData();
   }, []);
 
-  console.log(deck);
-
   return (
     <>
-      <Breadcrumb>
-        <Breadcrumb.Item>
-          <Link to="/">Home</Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item>
-          <Link to="/decks/:deckId/">Placeholder</Link>
-        </Breadcrumb.Item>
-        <Breadcrumb.Item active>Study</Breadcrumb.Item>
-      </Breadcrumb>
+      <ol className="breadcrumb">
+        <Link className="breadcrumb-item" to="/">
+          Home
+        </Link>
+
+        <Link className="breadcrumb-item" to={`/decks/${deckId}`}>
+          {deck.name}
+        </Link>
+        <li className="breadcrumb-item active">Study</li>
+      </ol>
+
+      <h2>{`Study: ${deck.name}`}</h2>
     </>
   );
 }
