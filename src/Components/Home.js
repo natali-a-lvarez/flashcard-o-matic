@@ -1,10 +1,6 @@
 import React from "react";
 import { listDecks, deleteDeck } from "../utils/api";
-import {
-  useHistory,
-  Link,
-  useParams,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory, Link } from "react-router-dom/cjs/react-router-dom.min";
 import { useState, useEffect } from "react";
 
 function Home() {
@@ -38,7 +34,7 @@ function Home() {
 
   const listOfDecks = decks.map((deck) => {
     return (
-      <div className="card" style={{ width: "30rem" }} key={deck.id}>
+      <div className="card mb-3" style={{ width: "30rem" }} key={deck.id}>
         <div className="card-body">
           <div className="card-title">{`${deck.name}`}</div>
           <div className="card-subtitle mb-2 text-muted">
@@ -65,7 +61,7 @@ function Home() {
 
   return (
     <>
-      <Link className="btn btn-secondary mb-2" to="/decks/new">
+      <Link className="btn btn-secondary mb-4" to="/decks/new">
         Create Deck
       </Link>
       <div>{listOfDecks}</div>
