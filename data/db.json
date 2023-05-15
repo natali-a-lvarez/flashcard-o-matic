@@ -6,7 +6,7 @@
       "id": 2
     },
     {
-      "name": "new deck",
+      "name": "New deck",
       "description": "example description",
       "id": 3
     }
@@ -51,6 +51,12 @@
       "back": "new card back",
       "deckId": 2,
       "id": 11
+    },
+    {
+      "front": "adding a card test",
+      "back": "black of adding card test",
+      "deckId": 2,
+      "id": 12
     }
   ]
 }

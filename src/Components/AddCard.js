@@ -4,8 +4,9 @@ import {
   useHistory,
   useParams,
 } from "react-router-dom/cjs/react-router-dom.min";
-import { createCard, readCard } from "../utils/api";
+import { createCard } from "../utils/api";
 import { readDeck } from "../utils/api";
+import CardForm from "../Components/CardForm";
 
 function AddCard() {
   const { deckId } = useParams();
@@ -31,7 +32,7 @@ function AddCard() {
       };
     }
     fetchData();
-  }, []);
+  }, [deckId]);
 
   function handleChange({ target }) {
     setNewCard({
@@ -69,39 +70,12 @@ function AddCard() {
         </li>
         <li className="breadcrumb-item active">Add Card</li>
       </ol>
-      <form onSubmit={handleSubmit}>
-        <h2>{deck.name}: Add Card</h2>
-        <div className="form-group">
-          <label>Front</label>
-          <textarea
-            id="front"
-            name="front"
-            className="form-control"
-            onChange={handleChange}
-            type="text"
-            value={newCard.front}
-            placeholder="Front side of card."
-          />
-        </div>
-        <div className="form-group">
-          <label>Back</label>
-          <textarea
-            id="back"
-            name="back"
-            className="form-control"
-            onChange={handleChange}
-            type="text"
-            value={newCard.back}
-            placeholder="Back side of card."
-          />
-        </div>
-        <button className="btn btn-secondary mx-1" onClick={() => handleDone()}>
-          Done
-        </button>
-        <button className="btn btn-primary mx-1" type="submit">
-          Save
-        </button>
-      </form>
+      <CardForm
+        handleSubmit={handleSubmit}
+        handleDone={handleDone}
+        handleChange={handleChange}
+        deck={deck}
+      />
     </div>
   );
 }
