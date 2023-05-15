@@ -1,5 +1,6 @@
 # Flashcard-o-matic
-<img width="1701" alt="Screenshot 2023-05-14 at 8 41 20 PM" src="https://github.com/natali-a-lvarez/flashcard-o-matic/assets/112902224/8c4ebe20-76a0-481f-a6e1-f17f7d6825c6">
+<img width="1701" alt="Screenshot 2023-05-14 at 8 41 20 PM" src="https://github.com/natali-a-lvarez/flashcard-o-matic/assets/112902224/025fe9bd-eb91-4fec-b82a-8cfb054e1f86">
+
 
 A web application designed to allow users to create, edit and study flashcard decks. 
 
