@@ -54,61 +54,55 @@ function AddCard() {
     return response;
   }
 
-  async function handleCancel() {
+  async function handleDone() {
     history.push(`/decks/${deck.id}`);
   }
 
   return (
-    <>
+    <div>
       <ol className="breadcrumb">
         <li className="breadcrumb-item">
           <Link to="/">Home</Link>
         </li>
         <li className="breadcrumb-item">
-          <Link to="/">{deck.name}</Link>
+          <Link to={`/decks/${deckId}`}>{deck.name}</Link>
         </li>
-        <li className="breadcrumb-item active">Create Card</li>
+        <li className="breadcrumb-item active">Add Card</li>
       </ol>
-
-      <h2>{`${deck.name}: Add Card`}</h2>
-
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="front" className="form-label">
-            Front
-          </label>
+        <h2>{deck.name}: Add Card</h2>
+        <div className="form-group">
+          <label>Front</label>
           <textarea
-            name="front"
-            placeholder="Front side of card"
-            className="form-control"
             id="front"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="description" className="form-label">
-            back
-          </label>
-          <textarea
+            name="front"
             className="form-control"
-            name="back"
-            placeholder="Back side of card"
-            id="back"
             onChange={handleChange}
+            type="text"
+            value={newCard.front}
+            placeholder="Front side of card."
           />
         </div>
-        <button onClick={handleCancel} className="btn btn-secondary mx-2">
+        <div className="form-group">
+          <label>Back</label>
+          <textarea
+            id="back"
+            name="back"
+            className="form-control"
+            onChange={handleChange}
+            type="text"
+            value={newCard.back}
+            placeholder="Back side of card."
+          />
+        </div>
+        <button className="btn btn-secondary mx-1" onClick={() => handleDone()}>
           Done
         </button>
-        <button
-          onSubmit={handleSubmit}
-          type="submit"
-          className="btn btn-primary"
-        >
+        <button className="btn btn-primary mx-1" type="submit">
           Save
         </button>
       </form>
-    </>
+    </div>
   );
 }
 
