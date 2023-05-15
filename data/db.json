@@ -9,11 +9,6 @@
       "name": "new deck",
       "description": "example description",
       "id": 3
-    },
-    {
-      "name": "",
-      "description": "",
-      "id": 4
     }
   ],
   "cards": [
@@ -50,6 +45,12 @@
       "back": "new card back",
       "deckId": 3,
       "id": 10
+    },
+    {
+      "front": "new card",
+      "back": "new card back",
+      "deckId": 2,
+      "id": 11
     }
   ]
 }
