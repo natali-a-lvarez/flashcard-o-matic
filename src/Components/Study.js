@@ -29,7 +29,7 @@ function Study() {
       };
     }
     fetchData();
-  }, []);
+  }, [deckId]);
 
   function nextCard(index, total) {
     if (index < total) {

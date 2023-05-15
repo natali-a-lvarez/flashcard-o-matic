@@ -28,7 +28,7 @@ function Deck() {
       };
     }
     fetchData();
-  }, []);
+  }, [deckId]);
 
   async function handleDeleteDeck(deck) {
     if (
@@ -115,7 +115,7 @@ function Deck() {
           </button>
         </div>
         <h2>Cards</h2>
-        <div>{card}</div>
+        <div className="mb-5">{card}</div>
       </main>
     </>
   );
