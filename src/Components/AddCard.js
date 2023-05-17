@@ -6,7 +6,7 @@ import {
 } from "react-router-dom/cjs/react-router-dom.min";
 import { createCard } from "../utils/api";
 import { readDeck } from "../utils/api";
-import CardForm from "../Components/CardForm";
+import CardForm from "./CardForm";
 
 function AddCard() {
   const { deckId } = useParams();
@@ -17,6 +17,7 @@ function AddCard() {
   };
   const [deck, setDeck] = useState([]);
   const [newCard, setNewCard] = useState(initialCardState);
+  const editCard = false;
 
   useEffect(() => {
     async function fetchData() {
@@ -44,7 +45,6 @@ function AddCard() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(newCard);
     const abortController = new AbortController();
     const response = await createCard(
       deckId,
@@ -75,6 +75,7 @@ function AddCard() {
         handleDone={handleDone}
         handleChange={handleChange}
         deck={deck}
+        edit={editCard}
       />
     </div>
   );

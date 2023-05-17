@@ -1,9 +1,21 @@
 import React from "react";
 
-function CardForm({ handleSubmit, handleChange, handleDone, deck }) {
+function CardForm({
+  handleSubmit,
+  handleChange,
+  handleDone,
+  deck,
+  card,
+  edit,
+}) {
+  console.log(card);
   return (
     <form onSubmit={handleSubmit}>
-      <h2>{deck.name}: Add Card</h2>
+      {edit === true ? (
+        <h2>{deck.name}: Edit Card</h2>
+      ) : (
+        <h2>{deck.name}: Add Card</h2>
+      )}
       <div className="form-group">
         <label>Front</label>
         <textarea
@@ -13,6 +25,7 @@ function CardForm({ handleSubmit, handleChange, handleDone, deck }) {
           onChange={handleChange}
           type="text"
           placeholder="Front side of card."
+          value={card.front}
         />
       </div>
       <div className="form-group">
@@ -24,6 +37,7 @@ function CardForm({ handleSubmit, handleChange, handleDone, deck }) {
           onChange={handleChange}
           type="text"
           placeholder="Back side of card."
+          value={card.back}
         />
       </div>
       <button className="btn btn-secondary mx-1" onClick={() => handleDone()}>

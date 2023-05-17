@@ -5,6 +5,7 @@ import {
   Link,
 } from "react-router-dom/cjs/react-router-dom.min";
 import { readDeck, readCard, updateCard } from "../utils/api";
+import CardForm from "./CardForm";
 
 function EditCard() {
   const { deckId, cardId } = useParams();
@@ -16,6 +17,7 @@ function EditCard() {
   };
   const [deck, setDeck] = useState([]);
   const [card, setCard] = useState(initialCardState);
+  const editCard = true;
 
   useEffect(() => {
     async function fetchData() {
@@ -33,7 +35,7 @@ function EditCard() {
       };
     }
     fetchData();
-  }, []);
+  }, [deckId, cardId]);
 
   function handleChange({ target }) {
     setCard({
@@ -42,7 +44,7 @@ function EditCard() {
     });
   }
 
-  async function handleUpdate(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     const abortController = new AbortController();
@@ -51,8 +53,8 @@ function EditCard() {
     return response;
   }
 
-  async function handleCancel() {
-    history.push(`/decks/${deckId}`);
+  async function handleDone() {
+    history.push(`/decks/${deck.id}`);
   }
 
   return (
@@ -69,42 +71,14 @@ function EditCard() {
 
       <h2>Edit Card</h2>
 
-      <form onSubmit={handleUpdate}>
-        <div className="mb-3">
-          <label htmlFor="front" className="form-label">
-            Front
-          </label>
-          <textarea
-            name="front"
-            value={card.front}
-            className="form-control"
-            id="front"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-2">
-          <label htmlFor="description" className="form-label">
-            back
-          </label>
-          <textarea
-            className="form-control"
-            name="back"
-            value={card.back}
-            id="back"
-            onChange={handleChange}
-          />
-        </div>
-        <button onClick={handleCancel} className="btn btn-secondary mx-2">
-          Cancel
-        </button>
-        <button
-          onSubmit={handleUpdate}
-          type="submit"
-          className="btn btn-primary"
-        >
-          Submit
-        </button>
-      </form>
+      <CardForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        handleDone={handleDone}
+        deck={deck}
+        card={card}
+        edit={editCard}
+      />
     </>
   );
 }
