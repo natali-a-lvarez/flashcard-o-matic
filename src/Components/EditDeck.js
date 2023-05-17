@@ -5,7 +5,6 @@ import {
   useHistory,
 } from "react-router-dom/cjs/react-router-dom.min";
 import { readDeck, updateDeck } from "../utils/api";
-import CardForm from "./CardForm";
 
 function EditDeck() {
   const { deckId } = useParams();
@@ -40,7 +39,7 @@ function EditDeck() {
     });
   }
 
-  async function handleSubmit(e) {
+  async function handleUpdate(e) {
     e.preventDefault();
 
     const abortController = new AbortController();
@@ -67,7 +66,44 @@ function EditDeck() {
 
       <h2>Edit Deck</h2>
 
-      <CardForm handleChange={handleChange} handleSubmit={handleSubmit} />
+      <form onSubmit={handleUpdate}>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Name
+          </label>
+          <input
+            type="text"
+            name="name"
+            value={deck.name}
+            className="form-control"
+            id="name"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-2">
+          <label htmlFor="description" className="form-label">
+            Description
+          </label>
+          <textarea
+            className="form-control"
+            name="description"
+            value={deck.description}
+            id="description"
+            onChange={handleChange}
+          />
+        </div>
+        <button onClick={handleCancel} className="btn btn-secondary mx-2">
+          Cancel
+        </button>
+        <button
+          onSubmit={handleUpdate}
+          type="submit"
+          className="btn btn-primary"
+          to="/decks/:deckId"
+        >
+          Submit
+        </button>
+      </form>
     </>
   );
 }

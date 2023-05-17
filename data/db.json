@@ -19,7 +19,7 @@
       "id": 4
     },
     {
-      "front": "What does <Switch> do?",
+      "front": "What does <Switch> do",
       "back": "Renders the first matching child <Route> ",
       "deckId": 2,
       "id": 5
@@ -57,6 +57,12 @@
       "back": "black of adding card test",
       "deckId": 2,
       "id": 12
+    },
+    {
+      "front": "test",
+      "back": "test",
+      "deckId": 2,
+      "id": 13
     }
   ]
 }
