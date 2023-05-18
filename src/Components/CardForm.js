@@ -4,8 +4,8 @@ function CardForm({
   handleSubmit,
   handleChange,
   handleDone,
-  deck,
   card,
+  deck,
   edit,
 }) {
   console.log(card);
@@ -25,7 +25,7 @@ function CardForm({
           onChange={handleChange}
           type="text"
           placeholder="Front side of card."
-          value={card.front}
+          value={card ? card.front : ""}
         />
       </div>
       <div className="form-group">
@@ -37,7 +37,7 @@ function CardForm({
           onChange={handleChange}
           type="text"
           placeholder="Back side of card."
-          value={card.back}
+          value={card ? card.back : ""}
         />
       </div>
       <button className="btn btn-secondary mx-1" onClick={() => handleDone()}>
