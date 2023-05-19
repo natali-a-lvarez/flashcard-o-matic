@@ -7,8 +7,8 @@ function CardForm({
   card,
   deck,
   edit,
+  newCard,
 }) {
-  console.log(card);
   return (
     <form onSubmit={handleSubmit}>
       {edit === true ? (
@@ -25,7 +25,7 @@ function CardForm({
           onChange={handleChange}
           type="text"
           placeholder="Front side of card."
-          value={card ? card.front : ""}
+          value={card ? card.front : newCard}
         />
       </div>
       <div className="form-group">
@@ -37,7 +37,7 @@ function CardForm({
           onChange={handleChange}
           type="text"
           placeholder="Back side of card."
-          value={card ? card.back : ""}
+          value={card ? card.back : newCard}
         />
       </div>
       <button className="btn btn-secondary mx-1" onClick={() => handleDone()}>

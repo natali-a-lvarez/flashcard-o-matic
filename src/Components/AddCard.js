@@ -76,6 +76,7 @@ function AddCard() {
         handleChange={handleChange}
         deck={deck}
         edit={editCard}
+        newCard={newCard}
       />
     </div>
   );
