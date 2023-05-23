@@ -25,7 +25,7 @@ function CardForm({
           onChange={handleChange}
           type="text"
           placeholder="Front side of card."
-          value={card ? card.front : newCard}
+          value={card ? card.front : newCard.value}
         />
       </div>
       <div className="form-group">
@@ -37,7 +37,7 @@ function CardForm({
           onChange={handleChange}
           type="text"
           placeholder="Back side of card."
-          value={card ? card.back : newCard}
+          value={card ? card.back : newCard.value}
         />
       </div>
       <button className="btn btn-secondary mx-1" onClick={() => handleDone()}>
